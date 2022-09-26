@@ -7,8 +7,6 @@ import core.IConvertToDate;
 
 public class ConvertToDate implements IConvertToDate {
 
-
-
 	@Override
 	public Date convert(byte[] bytes) {
 
@@ -22,12 +20,16 @@ public class ConvertToDate implements IConvertToDate {
 			long ticks = forDate << 2 >>> 2;
 			System.out.println("kind    " + kind + "   ticks " + ticks);
 
-			TimeZone timeZone = (kind == 1) ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
+			TimeZone timeZone = (kind <= 1) ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
+			System.out.println("tz = " + timeZone.getDisplayName());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy' 'HH:mm:ss");
 			dateFormat.setTimeZone(timeZone);
-			long temp = (ticks - 621355968000000000L) / 10000;
-			System.out.println("temp "+temp);
-		     Date result = new Date(temp);
+			long temp = 0;
+			if (ticks != 0) {
+				temp = (ticks - 621355968000000000L) / 10000;
+			}
+			System.out.println("temp " + temp);
+			Date result = new Date(temp);
 			System.out.println(dateFormat.format(result));
 			return result;
 		}
