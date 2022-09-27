@@ -29,16 +29,12 @@ public class ConfigXMLParser {
 			builder = factory.newDocumentBuilder();
 			this.document = builder.parse(new File(xmlFilePath));
 			document.getDocumentElement().normalize();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public Map<Integer, IConvertToType<?>> getConvertMap() {
+	public Map<Integer, IConvertToType<?>> getConvertMapFromXML() {
 		Map<Integer, IConvertToType<?>> convertMap = new HashMap<Integer, IConvertToType<?>>();
 		NodeList parserElements = document.getDocumentElement().getElementsByTagName("parser");
 		for (int i = 0; i < parserElements.getLength(); i++) {
