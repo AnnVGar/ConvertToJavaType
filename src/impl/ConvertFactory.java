@@ -11,7 +11,7 @@ public class ConvertFactory implements IConvertFactory {
 	@Override
 	public Map<Integer, IConvertToType<?>> getConvertMap(ConfigXMLParser configXMLParser) {
 		return  configXMLParser.getConvertMapFromXML();
-	}
-	
+	}	
 	
 }
+  

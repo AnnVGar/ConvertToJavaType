@@ -70,5 +70,11 @@ public class ConfigXMLParser {
 		String passwordValue = password.item(0).getAttributes().getNamedItem("value").getNodeValue();
 		return passwordValue;
 	}
+	
+	public double getMarginOfError() {
+		NodeList password = document.getElementsByTagName("marginOfError");
+		String passwordValue = password.item(0).getAttributes().getNamedItem("value").getNodeValue();
+		return Double.valueOf(passwordValue);
+	}
 
 }

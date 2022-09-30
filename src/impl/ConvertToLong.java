@@ -9,7 +9,6 @@ public class ConvertToLong implements IConvertToLong {
 		if (bytes != null) {
 			long result = 0;
 			int bytesLength = bytes.length;
-			System.out.println(bytesLength);
 			for (int i = 0; i < bytes.length; i++) {
 				if (bytesLength == 1) {
 					result = (byte) (result | ((bytes[i] & (0xFF)) << (8 * i)));
