@@ -3,9 +3,9 @@ package impl;
 import core.IConvertToLong;
 
 public class ConvertToLong implements IConvertToLong {
+
 	@Override
 	public Long convert(byte[] bytes) {
-
 		if (bytes != null) {
 			long result = 0;
 			int bytesLength = bytes.length;

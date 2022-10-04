@@ -6,6 +6,7 @@
 		<password value="123" />
 	</dbconnect>
 	<marginOfError value="0.000000000001"/>
+	
 	<parsers>
 		<parser dbType="1"   javaClass="ConvertToString" packageName="impl."/>
 		<parser dbType="3"   javaClass="ConvertToBool"   packageName="impl."/>
