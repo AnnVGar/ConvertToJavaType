@@ -5,27 +5,31 @@
 		<user value="a.garshina" />
 		<password value="123" />
 	</dbconnect>
-	<marginOfError value="0.000000000001"/>
-	
+
+	<parserSettings>
+		<marginOfError value="0.000000000001" />
+		<encoding value = "UTF-8"/>
+	</parserSettings>
+
 	<parsers>
-		<parser dbType="1"   javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="3"   javaClass="ConvertToBool"   packageName="impl."/>
-		<parser dbType="4"   javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="5"   javaClass="ConvertToLong"   packageName="impl."/>
-		<parser dbType="6"   javaClass="ConvertUToLong"  packageName="impl."/>
-		<parser dbType="7"   javaClass="ConvertToLong"   packageName="impl."/>
-		<parser dbType="8"   javaClass="ConvertUToLong"  packageName="impl."/>
-		<parser dbType="9"   javaClass="ConvertToLong"   packageName="impl."/>
-		<parser dbType="10"  javaClass="ConvertUToLong"  packageName="impl."/>
-		<parser dbType="11"  javaClass="ConvertToLong"   packageName="impl."/>
-		<parser dbType="12"  javaClass="ConvertUToLong"  packageName="impl."/>
-		<parser dbType="13"  javaClass="ConvertToDouble" packageName="impl."/>
-		<parser dbType="14"  javaClass="ConvertToDouble" packageName="impl."/>
-		<parser dbType="15"  javaClass="ConvertToDouble" packageName="impl."/>
-		<parser dbType="16"  javaClass="ConvertToDate"   packageName="impl."/>
-		<parser dbType="18"  javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="101" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="105" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="107" javaClass="ConvertToString" packageName="impl."/>
+		<parser dbType="1">impl.ConvertToString</parser>
+		<parser dbType="3">impl.ConvertToBool</parser>
+		<parser dbType="4">impl.ConvertToString</parser>
+		<parser dbType="5">impl.ConvertToLong</parser>
+		<parser dbType="6">impl.ConvertUToLong</parser>
+		<parser dbType="7">impl.ConvertToLong</parser>
+		<parser dbType="8">impl.ConvertUToLong</parser>
+		<parser dbType="9">impl.ConvertToLong</parser>
+		<parser dbType="10">impl.ConvertUToLong</parser>
+		<parser dbType="11">impl.ConvertToLong</parser>
+		<parser dbType="12">impl.ConvertUToLong</parser>
+		<parser dbType="13">impl.ConvertToDouble</parser>
+		<parser dbType="14">impl.ConvertToDouble</parser>
+		<parser dbType="15">impl.ConvertToDouble</parser>
+		<parser dbType="16">impl.ConvertToDate</parser>
+		<parser dbType="18">impl.ConvertToString</parser>
+		<parser dbType="101">impl.ConvertToString</parser>
+		<parser dbType="105">impl.ConvertToString</parser>
+		<parser dbType="107">impl.ConvertToString</parser>
 	</parsers>
 </config>

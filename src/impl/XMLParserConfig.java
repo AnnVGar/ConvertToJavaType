@@ -17,12 +17,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import core.IConvertToType;
+import core.IParserConfig;
 
-public class ConfigXMLParser {
+public class XMLParserConfig implements IParserConfig {
 
 	Document document;
 
-	public ConfigXMLParser(String xmlFilePath) {
+	public XMLParserConfig(String xmlFilePath) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		try {
@@ -34,7 +35,7 @@ public class ConfigXMLParser {
 		}
 	}
 
-	public Map<Integer, IConvertToType<?>> getConvertMapFromXML() {
+	public Map<Integer, IConvertToType<?>> getConvertMap() {
 		Map<Integer, IConvertToType<?>> convertMap = new HashMap<Integer, IConvertToType<?>>();
 		NodeList parserElements = document.getDocumentElement().getElementsByTagName("parser");
 		for (int i = 0; i < parserElements.getLength(); i++) {
@@ -43,8 +44,7 @@ public class ConfigXMLParser {
 
 			try {
 				convertMap.put(Integer.valueOf(attributes.getNamedItem("dbType").getNodeValue()),
-						(IConvertToType<?>) Class.forName(attributes.getNamedItem("packageName").getNodeValue()
-								+ attributes.getNamedItem("javaClass").getNodeValue()).newInstance());
+						(IConvertToType<?>) Class.forName(parser.getTextContent()).newInstance());
 			} catch (NumberFormatException | DOMException | InstantiationException | IllegalAccessException
 					| ClassNotFoundException e) {
 				e.printStackTrace();
@@ -53,28 +53,34 @@ public class ConfigXMLParser {
 		return convertMap;
 	}
 
-	public String getUrlFromXML() {
+	public String getUrl() {
 		NodeList url = document.getElementsByTagName("connection");
 		String urlValue = url.item(0).getAttributes().getNamedItem("value").getNodeValue();
 		return urlValue;
 	}
 
-	public String getUserFromXML() {
+	public String getUser() {
 		NodeList user = document.getElementsByTagName("user");
 		String userValue = user.item(0).getAttributes().getNamedItem("value").getNodeValue();
 		return userValue;
 	}
 
-	public String getPasswordFromXML() {
+	public String getPassword() {
 		NodeList password = document.getElementsByTagName("password");
 		String passwordValue = password.item(0).getAttributes().getNamedItem("value").getNodeValue();
 		return passwordValue;
 	}
 	
 	public double getMarginOfError() {
-		NodeList password = document.getElementsByTagName("marginOfError");
-		String passwordValue = password.item(0).getAttributes().getNamedItem("value").getNodeValue();
-		return Double.valueOf(passwordValue);
+		NodeList marginOfError = document.getElementsByTagName("marginOfError");
+		String marginOfErrorValue = marginOfError.item(0).getAttributes().getNamedItem("value").getNodeValue();
+		return Double.valueOf(marginOfErrorValue);
+	}
+	
+	public String getEncoding() {
+		NodeList encoding = document.getElementsByTagName("encoding");
+		String encodingValue = encoding.item(0).getAttributes().getNamedItem("value").getNodeValue();
+		return encodingValue;
 	}
 
 }

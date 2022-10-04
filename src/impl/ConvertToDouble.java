@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import core.IConvertToDouble;
 import exception.ExceedMarginOfError;
 import exception.IncorrectDataException;
-import main.ConvertToJavaType;
 
 public class ConvertToDouble implements IConvertToDouble {
 
@@ -60,7 +59,7 @@ public class ConvertToDouble implements IConvertToDouble {
 		bigDecimal = bigDecimal.divide(divisor);
 		double resultDouble = bigDecimal.doubleValue();
 		BigDecimal castError = bigDecimal.subtract(new BigDecimal(resultDouble)).abs();
-		if (castError.compareTo(new BigDecimal(ConvertToJavaType.marginOfError)) == 1) {
+		if (castError.compareTo(new BigDecimal(Convector.marginOfError)) == 1) {
 
 			throw new ExceedMarginOfError("castError = " + castError);
 		}
