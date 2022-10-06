@@ -2,13 +2,19 @@ package impl;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Map;
 
-import core.Convertor;
 import core.IConvertToDouble;
 import exception.ExceedMarginOfError;
 import exception.IncorrectDataException;
 
 public class ConvertToDouble implements IConvertToDouble {
+
+	private final double permissibleError;
+
+	public ConvertToDouble(Map<String, String> settings) {
+		permissibleError = Double.valueOf(settings.getOrDefault("permissibleError", "0.00001"));
+	}
 
 	@Override
 	public Double convert(byte[] bytes) throws IncorrectDataException, ExceedMarginOfError {
@@ -29,7 +35,7 @@ public class ConvertToDouble implements IConvertToDouble {
 		throw new IncorrectDataException("Incorrect data length");
 
 	}
- 
+
 	private Double floatToDouble(byte[] bytes) {
 		int toInt = 0;
 		for (int i = 0; i < bytes.length; i++) {
@@ -60,7 +66,7 @@ public class ConvertToDouble implements IConvertToDouble {
 		bigDecimal = bigDecimal.divide(divisor);
 		double resultDouble = bigDecimal.doubleValue();
 		BigDecimal castError = bigDecimal.subtract(new BigDecimal(resultDouble)).abs();
-		if (castError.compareTo(new BigDecimal(Convertor.marginOfError)) == 1) {
+		if (castError.compareTo(new BigDecimal(permissibleError)) == 1) {
 
 			throw new ExceedMarginOfError("castError = " + castError);
 		}

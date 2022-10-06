@@ -11,8 +11,8 @@ public class WorkDB {
 		Statement stmt;
 		try {
 			stmt = connection.createStatement();
-			return stmt.executeQuery("(SELECT DataType, DataValue FROM PropertyValue "//     )");
-					+ "WHERE DataType = 16 )");
+			return stmt.executeQuery("(SELECT DataType, DataValue FROM PropertyValue      )");
+//					+ "WHERE DataType = 2 )");
 //				+") union (Select 4 as DataType, 0xD093 as DataValue)");             //test type = 4      Ã    
 //				+") union (Select 5 as DataType,0x87  as DataValue)");             //test type = 5      -121      
 //	            +") union (Select 6 as DataType, 0xFF  as DataValue)");               //test type = 6      255

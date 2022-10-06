@@ -2,8 +2,6 @@ package impl;
 
 import java.util.Map;
 
-import core.IConfig;
-
 public class ConfigBean {
 
 	
