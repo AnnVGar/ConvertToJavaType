@@ -1,27 +1,32 @@
-package impl;
+package core;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import core.IConvertToType;
-import core.IParserConfig;
 import exception.ExceedMarginOfError;
 import exception.IncorrectDataException;
 import exception.TooLargeNumberException;
 import exception.UndefinedConvertException;
+import impl.ConfigBean;
 
-public class Convector {
-	static double marginOfError;
-	static String encoding;
+public class Convertor {
+	public static double marginOfError;
+	public static String encoding;
+	IConvertFactory factory;
+	ConfigBean configBean;
 	
-	public Convector( IParserConfig parserConfig) {
-		marginOfError = parserConfig.getMarginOfError();
-		encoding = parserConfig.getEncoding();
+	public Convertor( ConfigBean configBean, IConvertFactory factory) {
+		
+//		marginOfError = parserConfig.getMarginOfError();
+//		encoding = parserConfig.getEncoding();
+		
+		this.configBean = configBean;
+		this.factory = factory;
 	}
 	
-	public  void convertData(ResultSet rs, Map<Integer, IConvertToType<?>> convertMapping) {
-		
+	public  void convertData(ResultSet rs) {
+		Map<Integer, IConvertToType<?>> convertMapping = factory.getConvertMap(configBean);
 		try {
 			while (rs.next()) {
 				try {
@@ -33,8 +38,7 @@ public class Convector {
 					}
 					System.out.println(convertMapping.get(dataType).convert(rs.getBytes("DataValue")));
 					System.out.println();
-				} catch (TooLargeNumberException | UndefinedConvertException | IncorrectDataException
-						| ExceedMarginOfError e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

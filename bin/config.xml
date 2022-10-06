@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <config>
 	<dbconnect>
-		<connection value="jdbc:sqlserver://10.18.40.136:1433" />
-		<user value="a.garshina" />
-		<password value="123" />
+		<url>jdbc:sqlserver://10.18.40.136:1433</url>
+		<user>a.garshina</user>
+		<password>123</password>
 	</dbconnect>
-	<parsers>
-		<parser dbType="1" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="3" javaClass="ConvertToBool" packageName="impl."/>
-		<parser dbType="4" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="5" javaClass="ConvertToLong" packageName="impl."/>
-		<parser dbType="6" javaClass="ConvertUToLong" packageName="impl."/>
-		<parser dbType="7" javaClass="ConvertToLong" packageName="impl."/>
-		<parser dbType="8" javaClass="ConvertUToLong" packageName="impl."/>
-		<parser dbType="9" javaClass="ConvertToLong" packageName="impl."/>
-		<parser dbType="10" javaClass="ConvertUToLong" packageName="impl."/>
-		<parser dbType="11" javaClass="ConvertToLong" packageName="impl."/>
-		<parser dbType="12" javaClass="ConvertToLong" packageName="impl."/>
-		<parser dbType="13" javaClass="ConvertToDouble" packageName="impl."/>
-		<parser dbType="14" javaClass="ConvertToDouble" packageName="impl."/>
-		<parser dbType="16" javaClass="ConvertToDate" packageName="impl."/>
-		<parser dbType="18" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="101" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="105" javaClass="ConvertToString" packageName="impl."/>
-		<parser dbType="107" javaClass="ConvertToString" packageName="impl."/>
-	</parsers>
+
+
+	<convertersSettings>
+		<settings for="impl.ConvertToString">
+			<setting name="encoding">UTF-8</setting>
+		</settings>
+		<settings for="impl.ConvertToDouble">
+			<setting name="permissibleError">0.00001</setting>
+		</settings>
+	</convertersSettings>
+
+	<converters>
+		<converter dbType="1">impl.ConvertToString</converter>
+		<converter dbType="3">impl.ConvertToBool</converter>
+		<converter dbType="4">impl.ConvertToString</converter>
+		<converter dbType="5">impl.ConvertToLong</converter>
+		<converter dbType="6">impl.ConvertUToLong</converter>
+		<converter dbType="7">impl.ConvertToLong</converter>
+		<converter dbType="8">impl.ConvertUToLong</converter>
+		<converter dbType="9">impl.ConvertToLong</converter>
+		<converter dbType="10">impl.ConvertUToLong</converter>
+		<converter dbType="11">impl.ConvertToLong</converter>
+		<converter dbType="12">impl.ConvertUToLong</converter>
+		<converter dbType="13">impl.ConvertToDouble</converter>
+		<converter dbType="14">impl.ConvertToDouble</converter>
+		<converter dbType="15">impl.ConvertToDouble</converter>
+		<converter dbType="16">impl.ConvertToDate</converter>
+		<converter dbType="18">impl.ConvertToString</converter>
+		<converter dbType="101">impl.ConvertToString</converter>
+		<converter dbType="105">impl.ConvertToString</converter>
+		<converter dbType="107">impl.ConvertToString</converter>
+	</converters>
 </config>
