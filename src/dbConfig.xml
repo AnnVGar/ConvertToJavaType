@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config>
+	<dbConnect>
+		<url>jdbc:sqlserver://10.18.40.136:1433</url>
+		<user>a.garshina</user>
+		<password>123</password>
+	</dbConnect>
+</config>

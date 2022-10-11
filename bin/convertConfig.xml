@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config>
+	<dbConnect>
+		<url>jdbc:sqlserver://10.18.40.136:1433</url>
+		<user>a.garshina</user>
+		<password>123</password>
+	</dbConnect>
+
+
+	<convertersSettings>
+		<settings for="impl.convert.ConvertToString">
+			<setting name="encoding">UTF-8</setting>
+		</settings>
+		<settings for="impl.convert.ConvertToDouble">
+			<setting name="permissibleError">0.00001</setting>
+		</settings>
+	</convertersSettings>
+
+	<converters>
+		<converter dbType="1">impl.convert.ConvertToString</converter>
+		<converter dbType="3">impl.convert.ConvertToBool</converter>
+		<converter dbType="4">impl.convert.ConvertToString</converter>
+		<converter dbType="5">impl.convert.ConvertToLong</converter>
+		<converter dbType="6">impl.convert.ConvertUToLong</converter>
+		<converter dbType="7">impl.convert.ConvertToLong</converter>
+		<converter dbType="8">impl.convert.ConvertUToLong</converter>
+		<converter dbType="9">impl.convert.ConvertToLong</converter>
+		<converter dbType="10">impl.convert.ConvertUToLong</converter>
+		<converter dbType="11">impl.convert.ConvertToLong</converter>
+		<converter dbType="12">impl.convert.ConvertUToLong</converter>
+		<converter dbType="13">impl.convert.ConvertToDouble</converter>
+		<converter dbType="14">impl.convert.ConvertToDouble</converter>
+		<converter dbType="15">impl.convert.ConvertToDouble</converter>
+		<converter dbType="16">impl.convert.ConvertToDate</converter>
+		<converter dbType="18">impl.convert.ConvertToString</converter>
+		<converter dbType="101">impl.convert.ConvertToString</converter>
+		<converter dbType="105">impl.convert.ConvertToString</converter>
+		<converter dbType="107">impl.convert.ConvertToString</converter>
+	</converters>
+</config>
