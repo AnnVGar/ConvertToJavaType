@@ -1,18 +1,48 @@
-package impl;
+package impl.provide;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class WorkDB {
-	
-	public static ResultSet selectDataFromTable(Connection connection) {
-		Statement stmt;
+import core.config.DBConfigBean;
+import core.provide.IDataProvider;
+import main.DataToConvert;
+
+public class DBProvider implements IDataProvider {
+
+	private final DBConfigBean config;
+
+	public DBProvider(DBConfigBean config) {
+		this.config = config;
+	}
+
+	@Override
+	public List<DataToConvert> getData() {
+		List<DataToConvert> dataList = new ArrayList<>();
 		try {
-			stmt = connection.createStatement();
-			return stmt.executeQuery("(SELECT DataType, DataValue FROM PropertyValue     )");
-//					+ "WHERE DataType = 3 )");
+			Connection connection = DriverManager.getConnection(config.getUrl(), config.getUser(),
+					config.getPassword());
+			if (connection != null) {
+				ResultSet rs = connection.createStatement()
+						.executeQuery("(SELECT DataType, DataValue FROM PropertyValue      )");
+				while (rs.next()) {
+					DataToConvert data = new DataToConvert(rs.getInt("DataType"), rs.getBytes("DataValue"));
+					dataList.add(data);
+				}
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dataList;
+	}
+
+}
+
+//					+ " WHERE DataType = 3 )");
 //				+") union (Select 4 as DataType, 0xD093 as DataValue)");             //test type = 4      Ã    
 //				+") union (Select 5 as DataType,0x87  as DataValue)");             //test type = 5      -121      
 //	            +") union (Select 6 as DataType, 0xFF  as DataValue)");               //test type = 6      255
@@ -28,16 +58,7 @@ public class WorkDB {
 //          	+") union (Select 13 as DataType,0xE78745C1  as DataValue)");         //test type = 13      -12,34568
 //	            +") union (Select 14 as DataType,  0x012F83B4E6C75EC0  as DataValue)"); //test type = 14      -123.123456123456
 //					+ ") union (Select 15 as DataType,  0x61C80CCECB5C00000000000000000180 as DataValue)");// test type
-			// = 15
-			// -10203040506070,5
+// = 15
+// -10203040506070,5
 //			    + ") union (Select 15 as DataType,  0x01000000000000000000000000000580  as DataValue)"); // test type = 15      -0.00001
 //              +") union (Select 16 as DataType, 0x869E05CF60AE9A08  as DataValue)"); //test type = 16   //  14.09.1965 06(03):55:53
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-
-	}
-
-}

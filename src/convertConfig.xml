@@ -7,14 +7,14 @@
 	</dbConnect>
 
 
-	<convertersSettings>
+	<convertSettings>
 		<settings for="impl.convert.ConvertToString">
 			<setting name="encoding">UTF-8</setting>
 		</settings>
 		<settings for="impl.convert.ConvertToDouble">
 			<setting name="permissibleError">0.00001</setting>
 		</settings>
-	</convertersSettings>
+	</convertSettings>
 
 	<converters>
 		<converter dbType="1">impl.convert.ConvertToString</converter>

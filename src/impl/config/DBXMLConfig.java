@@ -1,34 +1,38 @@
 package impl.config;
 
-import java.io.File;
+import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import core.config.DBConfigBean;
+import core.config.IDBConfigProvider;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+public class DBXMLConfig extends XMLConfig implements IDBConfigProvider {
 
-import core.config.IDBConfig;
-
-public class DBXMLConfig  extends XMLConfig implements IDBConfig {
-	
-	Document document;
+	NodeList dbConnectSettings;
 
 	public DBXMLConfig(String xmlFilePath) {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder;
-		try {
-			builder = factory.newDocumentBuilder();
-			this.document = builder.parse(new File(xmlFilePath));
-			document.getDocumentElement().normalize();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		super(xmlFilePath);
+		dbConnectSettings = getAllChildrenNode("dbConnect");
 	}
-	
-	private Node getdbConnectNode(){
-		return document.getDocumentElement().getElementsByTagName("dbConnect").item(0);
-		
+
+	@Override
+	public DBConfigBean getConfig() {
+		DBConfigBean configBean = new DBConfigBean();
+		configBean.setUrl(getUrl());
+		configBean.setUser(getUser());
+		configBean.setPassword(getPassword());
+		return configBean;
+	}
+
+	public String getUrl() {
+		return getTagValueByTagName(dbConnectSettings, "url");
+	}
+
+	public String getUser() {
+		return getTagValueByTagName(dbConnectSettings, "user");
+	}
+
+	public String getPassword() {
+		return getTagValueByTagName(dbConnectSettings, "password");
 	}
 
 }

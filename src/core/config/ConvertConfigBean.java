@@ -2,32 +2,13 @@ package core.config;
 
 import java.util.Map;
 
-public class ConfigConvertBean {
+public class ConvertConfigBean {
 
 	
-	private String url;
-	private String user;
-	private String password;
+	
 	private Map<Integer, String> converters;
 	private Map<String, Map<String, String>> convertSettings;
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getUser() {
-		return user;
-	}
-	public void setUser(String user) {
-		this.user = user;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String getPassword) {
-		this.password = getPassword;
-	}
+
 	public Map<Integer, String> getConverters() {
 		return converters;
 	}

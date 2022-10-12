@@ -1,37 +1,32 @@
 package main;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import core.config.ConfigConvertBean;
-import core.config.IConvertConfig;
 import core.convert.Convertor;
 import core.convert.IConvertFactory;
-import impl.WorkDB;
+import core.provide.IDataProvider;
+import core.receive.IDataReceiver;
 import impl.config.ConvertXMLConfig;
+import impl.config.DBXMLConfig;
 import impl.convert.ConvertFactory;
+import impl.provide.DBProvider;
+import impl.receive.ConsoleReceiver;
 
 public class ConvertToJavaType {
 
-	public static final String xmlFilePath = "src" + File.separator + "convertConfig.xml";
+	public static final String xmlConvertFilePath = "src" + File.separator + "convertConfig.xml";
+	public static final String xmlDBFilePath = "src" + File.separator + "dbConfig.xml";
 
 	public static void main(String[] args) {
-		IConvertConfig config = new ConvertXMLConfig(xmlFilePath);
-		ConfigConvertBean configBean = config.getConfig();
-		IConvertFactory convertFactory = new ConvertFactory();
-		Convertor convertor = new Convertor(configBean, convertFactory);
-		try (Connection connection = DriverManager.getConnection(configBean.getUrl(), configBean.getUser(),
-				configBean.getPassword())) {
-			if (connection != null) {
-				ResultSet resultSet = WorkDB.selectDataFromTable(connection);
-				convertor.convertData(resultSet);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
+		IConvertFactory convertFactory = new ConvertFactory(new ConvertXMLConfig(xmlConvertFilePath).getConfig());
+		IDataProvider dataProvider = new DBProvider(new DBXMLConfig(xmlDBFilePath).getConfig());
+		IDataReceiver dataReceiver = new ConsoleReceiver();
+
+		Convertor convertor = new Convertor(convertFactory, dataProvider, dataReceiver);
+
+		convertor.start();
+
 	}
- 
+
 }

@@ -3,60 +3,30 @@ package impl.config;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import core.config.ConfigConvertBean;
-import core.config.IConvertConfig;
+import core.config.ConvertConfigBean;
+import core.config.IConvertConfigProvider;
 
-public class ConvertXMLConfig extends XMLConfig implements IConvertConfig {
-
-	
+public class ConvertXMLConfig extends XMLConfig implements IConvertConfigProvider {
 
 	public ConvertXMLConfig(String xmlFilePath) {
 		super(xmlFilePath);
 	}
 
-
-
 	@Override
-	public ConfigConvertBean getConfig() {
-		ConfigConvertBean configBean = new ConfigConvertBean();
-		configBean.setUrl(getUrl());
-		configBean.setUser(getUser());
-		configBean.setPassword(getPassword());
+	public ConvertConfigBean getConfig() {
+		ConvertConfigBean configBean = new ConvertConfigBean();
 		configBean.setConverters(getConverters());
 		configBean.setConvertSettings(getConvertSettings());
-
 		return configBean;
-	}
-	
-	
-
-	public String getUrl() {
-		NodeList url = document.getElementsByTagName("url");
-		String urlValue = url.item(0).getTextContent();
-		return urlValue;
-		
-	}
-
-	public String getUser() {
-		NodeList user = document.getElementsByTagName("user");
-		String userValue = user.item(0).getTextContent();
-		return userValue;
-	}
-
-	public String getPassword() {
-		NodeList password = document.getElementsByTagName("password");
-		String passwordValue = password.item(0).getTextContent();
-		return passwordValue;
 	}
 
 	public Map<Integer, String> getConverters() {
 		Map<Integer, String> convertMap = new HashMap<Integer, String>();
-		NodeList convertElements = document.getDocumentElement().getElementsByTagName("converter");
+		NodeList convertElements = getDefinedChildrenNode("converters", "converter");
 		for (int i = 0; i < convertElements.getLength(); i++) {
 			Node convert = convertElements.item(i);
 			NamedNodeMap attributes = convert.getAttributes();
@@ -67,7 +37,7 @@ public class ConvertXMLConfig extends XMLConfig implements IConvertConfig {
 
 	public Map<String, Map<String, String>> getConvertSettings() {
 		Map<String, Map<String, String>> convertSettings = new HashMap<String, Map<String, String>>();
-		NodeList settingsElement = document.getDocumentElement().getElementsByTagName("settings");
+		NodeList settingsElement = getDefinedChildrenNode("convertSettings", "settings");
 		for (int i = 0; i < settingsElement.getLength(); i++) {
 			Node settings = settingsElement.item(i);
 			String convertorName = settings.getAttributes().getNamedItem("for").getNodeValue();
