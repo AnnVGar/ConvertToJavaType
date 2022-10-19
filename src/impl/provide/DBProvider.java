@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.config.DBConfigBean;
+import core.convert.DataToConvert;
 import core.provide.IDataProvider;
-import main.DataToConvert;
 
 public class DBProvider implements IDataProvider {
 
