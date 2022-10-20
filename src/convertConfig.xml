@@ -18,7 +18,7 @@
 
 	<converters>
 		<converter dbType="1">impl.convert.ConvertToString</converter>
-		<converter dbType="3">impl.convert.ConvertToBool</converter>
+		<converter dbType="3">impl.convert.ConvertToLong</converter>
 		<converter dbType="4">impl.convert.ConvertToString</converter>
 		<converter dbType="5">impl.convert.ConvertToLong</converter>
 		<converter dbType="6">impl.convert.ConvertUToLong</converter>

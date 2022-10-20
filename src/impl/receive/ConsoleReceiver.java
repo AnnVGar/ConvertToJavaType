@@ -14,13 +14,13 @@ public class ConsoleReceiver implements IDataReceiver {
 		String className = data.getClass().getSimpleName().toString();
 		String phrase;
 		switch(className) {
-		case "String" : phrase = "Принимаю строку"; break;
-		case "Date" : phrase = "Принимаю дату"; break;
-		case "Long" : phrase = "Принимаю целое число"; break;
-		case "Double" : phrase = "Принимаю вещественное число"; break;
-		default: phrase = "Нет такого типа в списке, пора вызвать исключение";
+		case "String" : phrase = "Receive String "; break;
+		case "Date" : phrase = "Receive Date "; break;
+		case "Long" : phrase = "Receive Long "; break;
+		case "Double" : phrase = "Receive Double "; break;
+		default: phrase = "Type can't be received: "+className;
 		}
-		System.out.println(phrase+" "+className+" значение =  "+ data.toString());
+		System.out.println(phrase+" value = "+ data.toString());
 
 		
 	}	

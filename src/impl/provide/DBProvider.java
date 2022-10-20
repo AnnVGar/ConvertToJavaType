@@ -27,7 +27,7 @@ public class DBProvider implements IDataProvider {
 					config.getPassword());
 			if (connection != null) {
 				ResultSet rs = connection.createStatement()
-						.executeQuery("(SELECT DataType, DataValue FROM PropertyValue      )");
+						.executeQuery("(SELECT DataType, DataValue FROM PropertyValue  ) ");             //test type = 5      -121   );
 				while (rs.next()) {
 					DataToConvert data = new DataToConvert(rs.getInt("DataType"), rs.getBytes("DataValue"));
 					dataList.add(data);
